@@ -1,8 +1,7 @@
 <?php
-include 'config.php';
+include 'config.php'; //Mengimpor file yang berisi konfigurasi koneksi ke database
 
-// Ambil semua data mata kuliah dari database
-$result = $mysqli->query("SELECT * FROM mata_kuliah");
+$result = $mysqli->query("SELECT * FROM mata_kuliah"); //Bagian ini menjalankan query SQL yang mengambil semua data dari tabel mata_kuliah
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +15,6 @@ $result = $mysqli->query("SELECT * FROM mata_kuliah");
 </head>
 <body>
     <div class="container mt-5">
-        <!-- Card untuk tampilan yang lebih menarik -->
         <div class="card">
             <div class="card-header bg-primary text-white">
                 <h4 class="card-title">Daftar Mata Kuliah</h4>
@@ -31,28 +29,28 @@ $result = $mysqli->query("SELECT * FROM mata_kuliah");
                             <th>No</th>
                             <th>Kode MK</th>
                             <th>Nama MK</th>
+                            <th>Jenis Mk</th>
                             <th>SKS</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Nomor urut dinamis -->
                         <?php $nomor_urut = 1; while ($row = $result->fetch_assoc()): ?>
                             <tr>
                                 <td><?= $nomor_urut++; ?></td> <!-- Nomor urut dinamis -->
                                 <td><?= $row['kode_mk']; ?></td>
                                 <td><?= $row['nama_mk']; ?></td>
+                                <td><?= $row['jenis_mk']; ?></td>
                                 <td><?= $row['sks']; ?></td>
                                 <td>
                                     <a href="edit.php?id=<?= $row['id']; ?>" class="btn btn-warning btn-sm">
                                         <i class="fas fa-edit"></i> Edit
                                     </a>
-                                    <!-- Tombol untuk memicu modal konfirmasi hapus -->
+
                                     <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal<?= $row['id']; ?>">
                                         <i class="fas fa-trash-alt"></i> Hapus
                                     </button>
 
-                                    <!-- Modal konfirmasi hapus -->
                                     <div class="modal fade" id="deleteModal<?= $row['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
@@ -61,7 +59,7 @@ $result = $mysqli->query("SELECT * FROM mata_kuliah");
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    Apakah Anda yakin ingin menghapus mata kuliah <strong><?= $row['nama_mk']; ?></strong>?
+                                                    Ingin menghapus mata kuliah? <strong><?= $row['nama_mk']; ?></strong>?
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>

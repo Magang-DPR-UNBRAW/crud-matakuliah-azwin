@@ -4,10 +4,11 @@ include 'config.php';
 if (isset($_POST['submit'])) {
     $kode_mk = $_POST['kode_mk'];
     $nama_mk = $_POST['nama_mk'];
+    $jenis_mk = $_POST['jenis_mk'];
     $sks = $_POST['sks'];
 
-    $stmt = $mysqli->prepare("INSERT INTO mata_kuliah (kode_mk, nama_mk, sks) VALUES (?, ?, ?)");
-    $stmt->bind_param("ssi", $kode_mk, $nama_mk, $sks);
+    $stmt = $mysqli->prepare("INSERT INTO mata_kuliah (kode_mk, nama_mk, jenis_mk, sks) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $kode_mk, $nama_mk, $jenis_mk, $sks);
     $stmt->execute();
 
     header("Location: index.php");
@@ -40,6 +41,13 @@ if (isset($_POST['submit'])) {
                         <input type="text" name="nama_mk" class="form-control" id="nama_mk" required>
                     </div>
                     <div class="mb-3">
+                        <label for="jenis_mk" class="form-label">Jenis Mata Kuliah</label>
+                        <select name="jenis_mk" class="form-control" id="jenis_mk" required>
+                            <option value="Umum">Umum</option>
+                            <option value="Khusus">Khusus</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label for="sks" class="form-label">SKS</label>
                         <input type="number" name="sks" class="form-control" id="sks" required>
                     </div>
@@ -53,7 +61,6 @@ if (isset($_POST['submit'])) {
             </div>
         </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

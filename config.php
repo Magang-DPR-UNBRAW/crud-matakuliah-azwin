@@ -1,7 +1,7 @@
 <?php
 $host = 'localhost';
-$user = 'root';  // sesuaikan dengan user MySQL Anda
-$password = '';  // sesuaikan dengan password MySQL Anda
+$user = 'root'; 
+$password = '';  
 $database = 'matakuliah_db';
 
 $mysqli = new mysqli($host, $user, $password, $database);
